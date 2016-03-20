@@ -15,10 +15,10 @@ public:
      */
     int maxPoints(vector<Point>& points) {
         // Write your code here
-        return brute_force(points);
+        return bruteForce(points);
     }
     
-    int brute_force(vector<Point>& points) {
+    int bruteForce(vector<Point>& points) {
         int n = points.size();
         if (n < 2) return n;
         
@@ -29,12 +29,12 @@ public:
                 // (points[i], points[j])
                 int line_points = 0;
                 for (auto& p : points) {
-                    if (points[i].x == points[j].x && points[i].y == points[j].y) {
-                        if (p.x == points[i].x && p.y == points[i].y) {
+                    if (sameSpot(points[i], points[j])) {
+                        if (sameSpot(p, points[i])) {
                             line_points += 1;
                         }
                     } else {
-                        if (on_line(points[i], points[j], p)) {
+                        if (pointOnLine(points[i], points[j], p)) {
                             line_points += 1;
                         }
                     }
@@ -45,7 +45,11 @@ public:
         return max_points;
     }
     
-    bool on_line(const Point& p1, const Point& p2, const Point& p) {
+    bool pointOnLine(const Point& p1, const Point& p2, const Point& p) {
         return (p.x - p1.x) * (p2.y - p1.y) == (p.y - p1.y) * (p2.x - p1.x);
+    }
+
+    bool sameSpot(const Point& p1, const Point& p2) {
+      return p1.x == p2.x && p1.y == p2.y;
     }
 };

@@ -1,0 +1,6 @@
+1. add makefile
+2. add Gtest framework
+3. add test cases for each question
+4. add main file
+5. support auto build and auto testing
+6. integrate with Travis or other CI

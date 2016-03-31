@@ -1,0 +1,22 @@
+Thinking roadmap
+
+I. always come with naive(brute-force) solution first
+
+goal:
+1. The way of enumerate integer, substring 
+2. Generate permutation, combination through recursion
+3. Next permutation related questions 
+4. Construct Recursion tree
+5. Generate Subsets
+6. Backtracking framework
+
+keyword: brute-force, enumeration
+
+Sample Questions
+
+1. string permutation II
+2. 
+
+
+II. Data structures
+Sample Questions

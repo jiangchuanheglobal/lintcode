@@ -23,14 +23,22 @@ public:
             return;
         }
         for (int i = 0; i < nums.size(); i++) {
-            if (used[i] || (i && nums[i] == nums[i-1]) && !used[i-1]) continue;
-            
-            used[i] = true;
-            list.push_back(nums[i]);
-            permuteHelper(results, list, nums, used);
-            used[i] = false;
-            list.pop_back();
+            if (canTake(used, i)) {
+              used[i] = true;
+              list.push_back(nums[i]);
+              permuteHelper(results, list, nums, used);
+              used[i] = false;
+              list.pop_back();
+            }
         }
-        
+    }
+    bool canTake(vector<bool>& vis, int i) {
+      if (vis[i]) {
+        return false;
+      } else if (i > 0 && nums[i] == nums[i-1] && !vis[i]) {
+        return false;
+      } else {
+        return true;
+      }
     }
 };

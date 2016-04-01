@@ -21,12 +21,17 @@ public:
             results.push_back(list);
             
         for (int i = 0; i < nums.size(); i++) {
-            if (used[i]) continue;
-            used[i] = true;
-            list.push_back(nums[i]);
-            permuteHelper(results, list, nums, used);
-            list.pop_back();
-            used[i] = false;
+            if (canTake(vis, i)) {
+              used[i] = true;
+              list.push_back(nums[i]);
+              permuteHelper(results, list, nums, used);
+              list.pop_back();
+              used[i] = false;
+            }
         }
+    }
+
+    bool canTake(vector<bool>& vis, int i) {
+      return !vis[i];
     }
 };

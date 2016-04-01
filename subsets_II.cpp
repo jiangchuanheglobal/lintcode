@@ -16,11 +16,19 @@ public:
     void subsetsHelper(vector<vector<int> >& results, vector<int>& nums, vector<int>& list, int pos) {
         results.push_back(list);
         for (int i = pos; i < nums.size(); i++) {
-            if (i != pos && nums[i] == nums[i-1]) continue;
-            
-            list.push_back(nums[i]);
-            subsetsHelper(results, nums, list, i+1);
-            list.pop_back();
+            if (canTake(nums, pos, i)) {
+              list.push_back(nums[i]);
+              subsetsHelper(results, nums, list, i+1);
+              list.pop_back();
+            }
         }
+    }
+
+    bool canTake(vector<int>& nums, int pos, int i) {
+      if (i != pos && nums[i] == nums[i-1]) {
+        return false;
+      } else {
+        return true;
+      }
     }
 };

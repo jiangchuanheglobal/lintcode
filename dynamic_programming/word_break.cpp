@@ -8,11 +8,7 @@ public:
         // write your code here
         int len = s.length();
         // define
-        map<int, bool> f;
-        
-        for (int i = 0; i < len; i++) {
-            f[i] = false;
-        }
+        vector<bool> f(len + 1, false);
         
         int wordMin = INT_MAX; 
         int wordMax = INT_MIN;
@@ -22,17 +18,17 @@ public:
         }
         
         // init
-        f[-1] = true;
+        f[0] = true;
         
         // function
-        for (int i = 0; i < len; i++) {
-            for (int j = i - wordMin; j >= i - wordMax && j >= -1; j--) {
-                if (f[j] && dict.find(s.substr(j + 1, i - j)) != dict.end()) {
+        for (int i = 1; i <= len; i++) {
+            for (int j = i - wordMin; j >= i - wordMax && j >= 0; j--) {
+                if (f[j] && dict.find(s.substr(j, i - j)) != dict.end()) {
                     f[i] = true;
                     break;
                 }
             }
         }
-        return f[len - 1];
+        return f[len];
     }
 };

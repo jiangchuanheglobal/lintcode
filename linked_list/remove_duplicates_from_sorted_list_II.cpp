@@ -18,27 +18,29 @@ public:
      */
     ListNode * deleteDuplicates(ListNode *head) {
         // write your code here
-        ListNode dummy(INT_MIN);
-        ListNode* prev = &dummy;
-        ListNode* node = &dummy;
-        ListNode* curt = head;
+        if (!head) return head;
         
+        map<int, int> times;
+        ListNode dummy(0);
+        ListNode *curt = head;
         while (curt) {
-            if (curt->next) {
-                if (prev->val != curt->val && curt->val != curt->next->val) {
-                    node->next = curt;
-                    node = node->next;
-                }
-            } else {
-                if (prev->val != curt->val) {
-                    node->next = curt;
-                    node = node->next;
-                }
+            if (times.find(curt->val) == times.end()) {
+                times[curt->val] = 0;
+            }
+            times[curt->val] += 1; 
+            curt = curt->next;
+        }
+        
+        curt = head;
+        ListNode *last = &dummy;
+        while (curt) {
+            if (times[curt->val] == 1) {
+                last->next = curt;
+                last = last->next;
             }
             curt = curt->next;
-            prev = prev->next;
         }
-        node->next = NULL;
+        last->next = NULL;
         return dummy.next;
     }
 };
